@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-
+// lib/screens/home_page.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/providers/students_provider.dart';
-import '../student_detail/student_details_screen.dart';
+import 'widgets/home_widgets.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -25,39 +24,7 @@ class HomePage extends StatelessWidget {
           } else if (snapshot.hasError) {
             return const Center(child: Text("Error loading data"));
           } else {
-            return ListView.builder(
-              itemCount: studentProvider.students.length,
-              itemBuilder: (context, index) {
-                final student = studentProvider.students[index];
-                return Card(
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: AssetImage(student.photo),
-                    ),
-                    title: Text(student.name),
-                    subtitle: Text(student.email),
-                    trailing: Text(
-                      student.status,
-                      style: TextStyle(
-                        color: student.status == 'Enrolled'
-                            ? Colors.green
-                            : Colors.grey,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              StudentDetailPage(student: student.toJson()),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              },
-            );
+            return StudentListWidget(students: studentProvider.students);
           }
         },
       ),
