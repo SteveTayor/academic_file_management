@@ -43,6 +43,7 @@ dependencies:
   animated_widgets: ^1.1.0
   logger: ^2.4.0
   get_storage: ^2.1.1
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
